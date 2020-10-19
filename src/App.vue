@@ -1,10 +1,10 @@
 <template>
-    <TodoList />
+    <Users />
 </template>
 
 <script>
-import TodoList from './TodoList';
+import Users from './Users' ;
 export default {
-      components:{ TodoList },
+      components:{ Users },
     };
 </script>
