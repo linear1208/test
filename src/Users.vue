@@ -3,8 +3,12 @@
         {{users.length}}
         <button @click="setAsce">Age Asce</button>
         <button @click="setDesc">Age Desc</button>
-        <ul>
-            <li v-for="(user,idx) in sortedUsers" :key="idx">{{user.name}} ({{user.age}})</li>
+        <input v-model="search" />
+        <ul class="list">
+            <li class="item" v-for="(user,idx) in sortedUsers" :key="idx" >
+                <img :src="user.picture" class="avatar" />
+                <span>{{user.name}} ({{user.age}})</span>
+            </li>
         </ul>
     </div>
 </template>
@@ -14,11 +18,17 @@ export default {
     data:() => ({
         users,
         order :1,
+        search:"",
     }),
     computed:{
         sortedUsers(){
-            const users = [...this.users]
-            return users.sort(
+            const users = [...this.users];
+
+            const filtered = users.filter(
+                (user) => user.name.toLowerCase().includes(this.search.toLowerCase())
+                
+            );
+            return filtered.sort(
                 (a,b) => (a.age - b.age)*this.order 
             )
         }
@@ -36,3 +46,21 @@ export default {
     }
 }
 </script>
+<style scoped>
+.avatar{
+    width: 80px;
+    height: 80px;
+    display: block;
+    border-radius: 50px;
+}
+.item{
+    margin: 4px;
+    text-align: center;
+}
+.list{
+    list-style: none;
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0;
+}
+</style>

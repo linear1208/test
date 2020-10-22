@@ -1,10 +1,14 @@
 <template>
-    <Users />
+    <TicTacToe></TicTacToe>
+    
 </template>
 
 <script>
-import Users from './Users' ;
+import TicTacToe from './TicTacToe' ;
 export default {
-      components:{ Users },
+      components:{ TicTacToe },
+      methods:{
+          
+      }
     };
 </script>
