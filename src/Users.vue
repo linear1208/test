@@ -18,7 +18,15 @@ export default {
     data:() => ({
         users,
         order :1,
-        search:"",
+        //search:"",
+    }),
+    state:()=>({
+        cart:[],
+    }),
+    actions:()=>({
+        addToCart(context,name){
+            context.commit('addToCart',name);
+        }
     }),
     computed:{
         sortedUsers(){
@@ -31,6 +39,17 @@ export default {
             return filtered.sort(
                 (a,b) => (a.age - b.age)*this.order 
             )
+        },
+        search:{
+            get(){
+                //get query string from route
+                return this.$route.query.search||'';
+            },
+            set(val){
+                this.$router.push({
+                    query:{search:val},
+                })
+            },
         }
     },
     methods :{
@@ -43,6 +62,9 @@ export default {
         setDesc(){
             this.order = -1;
         },
+        add(name){
+            this.commit('addToCart',name);
+        }
     }
 }
 </script>
